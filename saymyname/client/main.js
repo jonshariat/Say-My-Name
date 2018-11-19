@@ -3,20 +3,30 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+People = new Mongo.Collection('people');
+
+Template.body.helpers({
+  name: function() {
+    return People.find();
+  }
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
+Template.body.events({
+  'submit .new-people': function(event) {
+    var name = event.target.name.value;
+
+    People.insert({
+      name: name,
+      createdAt: new Date()
+    });
+    event.target.name.value = "";
+
+    return false;
+  }
 });
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+Template.displayNames.events({
+  'click .delete': function() {
+    People.remove(this._id);
+  }
 });

@@ -1,25 +1,31 @@
 <head>
-  <title>saymyname</title>
+  <title>Say My Name</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <div class="container">
 
-  {{> hello}}
-  {{> info}}
+  <h1>Say My Name</h1>
+
+  <form class="new-people">
+    <input type="text" name="name" placeholder="Add a name">
+    <input type="submit" value="Add">
+
+  </form>
+
+
+  <h2>Names</h2>
+  <ul>
+    {{#each name}}
+    {{> displayNames}}
+    {{/each}}
+  </ul>
+  </div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="displayNames">
+  <li>
+    {{name}}
+    <button class="delete">Remove</button>
+  </li>
 </template>
