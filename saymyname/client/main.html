@@ -6,13 +6,13 @@
   <div class="container">
 
   <h1>Say My Name</h1>
+{{> loginButtons}}
 
+{{#if currentUser}}
   <form class="new-people">
     <input type="text" name="name" placeholder="Add a name">
     <input type="submit" value="Add">
-
   </form>
-
 
   <h2>Names</h2>
   <ul>
@@ -20,7 +20,11 @@
     {{> displayNames}}
     {{/each}}
   </ul>
+
+  {{/if}}
   </div>
+
+
 </body>
 
 <template name="displayNames">
